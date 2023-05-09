@@ -16,7 +16,7 @@
       var: default_win_user.stdout
 
   - name: Get list of all groups user is a member of
-    ansible.windows.win_shell: $DN = (Get-ADUser -Identity "{{ansible_user }}" -Properties DistinguishedName).DistinguishedName Get-ADGroup -LDAPFilter "(member:1.2.840.113556.1.4.1941:=$($DN))"
+    ansible.windows.win_shell: Get-ADPrincipalGroupMembership "{{ansible_user }}"
     register: my_groups
 
   - name: Display groups
